@@ -625,7 +625,7 @@ Megapixels                      : 0.427
 
 ```
 
-Usinf CyberChef's Magic tool first it decode to Base64 then to Base32 
+Using CyberChef's Magic tool first it decode to Base64 then to Base32 
 After that I tried various decoding methods, in which I got the flag in ROT47 Bruteforce
 ```
 Amount = 56: ci^dxBUFC\P>VP\EFz
@@ -638,3 +638,9 @@ Amount = 62: iodj~H[LIbVD\VbKL"
 ```
 FLAG: `flag{EXIF_SAYS_HI}`
 
+## Sanity Check
+
+From hint I got to know that its present in voice chat `general`
+
+`flag{entered_th3_m3tr4x}`
+![](Pasted%20image%2020250905230220.png)
