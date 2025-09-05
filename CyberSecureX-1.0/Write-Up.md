@@ -401,3 +401,118 @@ it was Base 58, so converted
 ![Screenshot_2025-09-05_17_32_52.png](3783caea-b3a5-4cf0-8bbe-9cd5b5238792.png)
 
 Flag: flag{STEREO_SECRET}
+
+## Hidden Whispers
+
+We got a wall.jpg file...  As the challenge is stego and file is .jpg so it will be solved by _steghide_
+
+But we do not know the passphrase, but we can bruteforce it by using tool `stegcracker`
+
+```bash
+──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ stegcracker wall.jpg /usr/share/wordlists/rockyou.txt   
+StegCracker 2.1.0 - (https://github.com/Paradoxis/StegCracker)
+Copyright (c) 2025 - Luke Paris (Paradoxis)
+
+StegCracker has been retired following the release of StegSeek, which 
+will blast through the rockyou.txt wordlist within 1.9 second as opposed 
+to StegCracker which takes ~5 hours.
+
+StegSeek can be found at: https://github.com/RickdeJager/stegseek
+
+Counting lines in wordlist..
+Attacking file 'wall.jpg' with wordlist '/usr/share/wordlists/rockyou.txt'..
+Successfully cracked file with password: 123456
+Tried 1 passwords
+Your file has been written to: wall.jpg.out
+
+```
+FLAG: `flag{E4SY_ST3G_UNL0CK3D}`
+
+## Nom Nom Nom
+
+Some memories hide between the lines. Check the margins.
+
+In `exiftool` I found this :
+```bash
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ exiftool old_photo.jpg                                                 
+ExifTool Version Number         : 13.25
+File Name                       : old_photo.jpg
+Directory                       : .
+File Size                       : 86 kB
+File Modification Date/Time     : 2025:08:29 23:24:05+05:30
+File Access Date/Time           : 2025:09:05 21:13:03+05:30
+File Inode Change Date/Time     : 2025:09:05 21:12:56+05:30
+File Permissions                : -rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Profile CMM Type                : Little CMS
+Profile Version                 : 2.1.0
+Profile Class                   : Display Device Profile
+Color Space Data                : RGB
+Profile Connection Space        : XYZ
+Profile Date Time               : 2012:01:25 03:41:57
+Profile File Signature          : acsp
+Primary Platform                : Apple Computer Inc.
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : 
+Device Model                    : 
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Little CMS
+Profile ID                      : 0
+Profile Description             : c2
+Profile Copyright               : FB
+Media White Point               : 0.9642 1 0.82491
+Media Black Point               : 0.01205 0.0125 0.01031
+Red Matrix Column               : 0.43607 0.22249 0.01392
+Green Matrix Column             : 0.38515 0.71687 0.09708
+Blue Matrix Column              : 0.14307 0.06061 0.7141
+Red Tone Reproduction Curve     : (Binary data 64 bytes, use -b option to extract)
+Green Tone Reproduction Curve   : (Binary data 64 bytes, use -b option to extract)
+Blue Tone Reproduction Curve    : (Binary data 64 bytes, use -b option to extract)
+Current IPTC Digest             : 05a9a5f0e096c9c20a73d2fe6f7e7a1d
+Copyright Notice                : Grafner | Dreamstime.com
+Application Record Version      : 4
+XMP Toolkit                     : Image::ExifTool 11.88
+Licensor URL                    : https://www.dreamstime.com
+Web Statement                   : https://www.dreamstime.com/about-stock-image-licenses
+Exif Byte Order                 : Big-endian (Motorola, MM)
+X Resolution                    : 72
+Y Resolution                    : 72
+Resolution Unit                 : inches
+Y Cb Cr Positioning             : Centered
+Copyright                       : Grafner | Dreamstime.com
+Exif Version                    : 0232
+Components Configuration        : Y, Cb, Cr, -
+User Comment                    : Rk1ZU01MQ0FOQjVXWTJKRU9aU0hZNVJFTk5XRUU9PT0=
+Flashpix Version                : 0100
+Color Space                     : Uncalibrated
+Image Width                     : 800
+Image Height                    : 534
+Encoding Process                : Progressive DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+Image Size                      : 800x534
+Megapixels                      : 0.427
+
+```
+
+Usinf CyberChef's Magic tool first it decode to Base64 then to Base32 
+After that I tried various decoding methods, in which I got the flag in ROT47 Bruteforce
+```
+Amount = 56: ci^dxBUFC\P>VP\EFz
+Amount = 57: dj_eyCVGD]Q?WQ]FG{
+Amount = 58: ek`fzDWHE^R@XR^GH|
+Amount = 59: flag{EXIF_SAYS_HI}
+Amount = 60: gmbh|FYJG`TBZT`IJ~
+Amount = 61: hnci}GZKHaUC[UaJK!
+Amount = 62: iodj~H[LIbVD\VbKL"
+```
+FLAG: `flag{EXIF_SAYS_HI}`
+
