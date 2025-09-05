@@ -102,3 +102,87 @@ Every drive has its own `.sys`(System file), So I search for it and found it...
 And on doing `strings` we got this flag...
 
 ![](Pasted%20image%2020250905161910.jpg)
+
+# OSINT
+
+## Three_day_invasion (200 Points)
+
+Pretty simple, just reverse search the image, you will get it in X(formerly
+twitter)
+
+![Screenshot_2025-09-05_17_23_35.png](6c185b9f-5a53-4ba8-ad8b-3146faaabe37.png)
+
+Flag: flag{jembobineuse}
+
+## Lost in Dusts (300 Points)
+
+Reverse search on google, it’s sandwedges in Ghaziabad
+
+![Screenshot_2025-09-05_17_26_56.png](82f969de-a065-4096-a83d-2eb9a8ae1b3f.png)
+
+Pretty classic, went to google map reviews, sorted by newest and found the
+flag in recent review
+
+Flag: flag{rusted_lotus_47}
+
+## Just Search It Writeup
+
+so today we are going to discuss about the CTF  OSINT challenge of just search it (points - 200) organized by cybersecure
+
+At First we got this webp file showing a bunch of people attending a session and if we carefully look in the bottom left we can see the sign says something like __con. 
+
+1. First i copy pasted the code in the screen in github but no luck
+2. second when i tried to read the code there a [file.rs](http://file.rs) mentioned and i search it and i get to know it is a rust program  
+
+ 
+![challenge.png](challenge.png)
+
+
+### The Rust Code
+
+```
+error[E0308]: mismatched types
+  --> file.rs:3:9
+   |
+3  |   foo(&x);
+   |   ^^^^ expected usize, found u32
+   |
+   = note: expected type `&usize`
+              found type `&u32`
+error: aborting due to previous error
+```
+
+if we look carefully there a speaker discussing this rust code with an audience ..the poster where the speaker is cropped but we can identify its a Con as in defcon nullcon conferences .. i started searching for every type of conf and started searching their stage image no luck finding any match but i searched for RUSTCON and just a bit of guess regarding the A in the image i went with “RUSTCON ASIA” and yeh same to same stage images 
+
+  
+
+![Screenshot_2025-09-05_17_01_09.png](6bc0f6b9-48c5-41fc-84ea-e58355ae225f.png)
+
+# Youtube Video 0f RUSTCON 2019
+
+![Screenshot_2025-09-05_17_03_25.png](178aef95-b4f1-4ecd-9f4c-0470f490d66c.png)
+
+Got to Know the speaker is Nick cameron and he has a github profile….
+
+![Screenshot_2025-09-05_17_05_25.png](7bde344d-6a90-4143-88a0-3de0b7bc3166.png)
+
+after that i just searched “flag{” and found the flag pushed in issues 
+
+![Screenshot_2025-09-05_17_07_06.png](989da22e-37a2-4e38-856c-6cd19bdddaf0.png)
+
+*flag*{f0und_th3_s0urc3_l1k3_a_b0ss}
+
+# Steganography
+
+## Layers of Silence (200 Points)
+
+Another classic challenge, from hints in challenge description, I knew it would
+be LSB, so I used zsteg. Found encrypted text
+
+![Screenshot_2025-09-05_17_31_25.png](1fd9eafc-c2a1-47a5-8636-ce217df1a29f.png)
+
+it was Base 58, so converted
+
+![Screenshot_2025-09-05_17_32_52.png](3783caea-b3a5-4cf0-8bbe-9cd5b5238792.png)
+
+Flag: flag{STEREO_SECRET}
