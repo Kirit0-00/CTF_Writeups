@@ -82,3 +82,19 @@ echo
 �	�	�	�	�	�	�	�	hahatryagainbaby�	��	�	�	�	�	flag{addr3ss_res0lv3d_bu7_n0t_issues}�	---> Got the flag
 
 ```
+
+# Misc
+
+## Plug and Play
+
+Here we are given a windows2000 ova file... and told that there is shady driver its IOCTL handler leaks secrets if you poke it the right way.
+
+So after opening the VM file I search for a tool WinObj which allows us to view drivers as objects in windows...
+
+In that I found a driver named as leakydrv...
+
+Every drive has its own `.sys`(System file), So I search for it and found it...
+
+And inside that the flag was present...
+
+![](Pasted%20image%2020250905161910.jpg)
