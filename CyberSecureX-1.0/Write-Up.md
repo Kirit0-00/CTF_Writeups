@@ -289,6 +289,128 @@ And on doing `strings` we got this flag...
 
 ![](Pasted%20image%2020250905161910.jpg)
 
+## OG
+
+After downloading the file I searched in ChatGPT , it gave me this tool : https://ncviewer.com/?utm_source=chatgpt.com
+
+![](Pasted%20image%2020250905215338.png)
+
+The string was `W9gt5z7h`  After searching a lot I found out that this was a pastebin endpoint..
+
+In that another gcode was there 
+![](Pasted%20image%2020250905220234.png)
+
+FLAG : `flag{G_m4n_hehe}`
+
+## The Archivist's Riddle 
+
+```bash
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ cat pass.txt    
+0h9bJv1@T
+r8N$!zK2p
+7eY&wQ3xL
+5dU*aM4cA
+l6F#bG5iZ
+83hfb^pl0
+@dj13e890
+kdow#pdo8
+
+                                                                                                                                                                            
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ cat riddel.txt 
+I have cities, but no houses.
+I have mountains, but no trees.
+I have water, but no fish.
+I contain the essence of all, yet reveal none.
+
+What am I?
+
+My final word is a key, but it unlocks no lock.
+                                                                                                                                                                            
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ strings encrypted.bin| grep flag
+this_is_not_the_real_flag_or_password
+                                                                                                                                                                            
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ file challange.zip                                                                                                   
+challange.zip: POSIX shell script executable (binary data)
+
+```
+
+I found that the zip file is POSIX shell script..
+
+Using strings I got this:
+```bash
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ strings challenge| grep flag 
+?@@@	@@@@@@@ @@(@@this_is_not_the_real_flag_or_passwordAuthentication successful. The key to the next step is not here.Authentication failed. The key you seek is elsewhere.Enter the secret key: 
+?@@@	@@@@@@@ @@(@@this_is_not_the_real_flag_or_passwordAuthentication successful. The key to the next step is not here.Authentication failed. The key you seek is elsewhere.Enter the secret key: 
+echo "flag{executing...'b
+?@@@	@@@@@@@ @@(@@this_is_not_the_real_flag_or_passwordAuthentication successful. The key to the next step is not here.Authentication failed. The key you seek is elsewhere.Enter the secret key: 
+this_is_not_the_real_flag_or_passwordAuthentication
+```
+
+Then we contacted OC about what or where is the other part of the flag : 
+
+So they provided us with the full flag:
+`flag{executing_the_truth}`
+
+## Web_access
+
+In this we are given web_access zip file which was password protected....
+I got to know that the password is a pangram :
+So I searched internet which are famous pangrams it gave me this : `thequickbrownfoxjumpsoverthelazydog`
+
+Then I got a web_access.log file in which find sql injection was going on... using SUBSTRING which contains the flag:
+```bash
+┌──(kirit0_㉿m4ch1n3)-[~/CTF/cybersecure2.0]
+└─$ less web_access.log | grep -i substring
+192.168.0.92 - - [10/02/2024:01:32:28 +0000] "GET /search?id=1' OR SUBSTRING((SELECT f),1,1)='f' --  HTTP/2" 200 894 "-" "Safari/537.36"
+192.168.0.198 - - [09/04/2024:02:29:55 +0000] "GET /search?id=1' OR SUBSTRING((SELECT l),1,1)='l' --  HTTP/2" 403 4945 "-" "Chrome/91.0"
+192.168.0.61 - - [27/06/2024:16:37:05 +0000] "GET /search?id=1' OR SUBSTRING((SELECT a),1,1)='a' --  HTTP/1.1" 500 1274 "http://test.com" "Safari/537.36"
+192.168.0.88 - - [09/01/2024:23:01:49 +0000] "GET /search?id=1' OR SUBSTRING((SELECT g),1,1)='g' --  HTTP/2" 404 3747 "http://test.com" "Mozilla/5.0"
+192.168.0.172 - - [14/02/2024:02:19:58 +0000] "GET /search?id=1' OR SUBSTRING((SELECT {),1,1)='{' --  HTTP/1.1" 500 4438 "http://test.com" "Safari/537.36"
+192.168.0.97 - - [08/03/2024:12:02:23 +0000] "GET /search?id=1' OR SUBSTRING((SELECT s),1,1)='s' --  HTTP/2" 403 4226 "http://test.com" "Chrome/91.0"
+192.168.0.78 - - [19/04/2024:05:04:51 +0000] "POST /search?id=1' OR SUBSTRING((SELECT q),1,1)='q' --  HTTP/1.1" 403 2959 "http://test.com" "Mozilla/5.0"
+192.168.0.58 - - [05/04/2024:06:16:35 +0000] "GET /search?id=1' OR SUBSTRING((SELECT l),1,1)='l' --  HTTP/1.1" 200 1225 "http://test.com" "Mozilla/5.0"
+192.168.0.34 - - [18/04/2024:04:31:29 +0000] "POST /search?id=1' OR SUBSTRING((SELECT _),1,1)='_' --  HTTP/2" 200 1803 "http://test.com" "Chrome/91.0"
+192.168.0.37 - - [15/12/2024:17:32:47 +0000] "GET /search?id=1' OR SUBSTRING((SELECT i),1,1)='i' --  HTTP/1.1" 500 3193 "http://example.com" "Mozilla/5.0"
+192.168.0.244 - - [27/02/2024:19:30:23 +0000] "GET /search?id=1' OR SUBSTRING((SELECT n),1,1)='n' --  HTTP/2" 500 4301 "-" "Safari/537.36"
+192.168.0.141 - - [28/10/2024:03:57:13 +0000] "POST /search?id=1' OR SUBSTRING((SELECT j),1,1)='j' --  HTTP/2" 500 3596 "http://test.com" "Safari/537.36"
+192.168.0.189 - - [14/11/2024:14:42:26 +0000] "POST /search?id=1' OR SUBSTRING((SELECT e),1,1)='e' --  HTTP/1.1" 200 340 "http://test.com" "Mozilla/5.0"
+192.168.0.49 - - [17/08/2024:20:31:58 +0000] "GET /search?id=1' OR SUBSTRING((SELECT c),1,1)='c' --  HTTP/2" 200 792 "-" "Chrome/91.0"
+192.168.0.48 - - [05/04/2024:16:22:20 +0000] "POST /search?id=1' OR SUBSTRING((SELECT t),1,1)='t' --  HTTP/2" 500 3490 "-" "Safari/537.36"
+192.168.0.229 - - [19/05/2024:14:18:57 +0000] "POST /search?id=1' OR SUBSTRING((SELECT i),1,1)='i' --  HTTP/1.1" 200 2023 "http://example.com" "Safari/537.36"
+192.168.0.120 - - [14/05/2024:06:08:46 +0000] "GET /search?id=1' OR SUBSTRING((SELECT 0),1,1)='0' --  HTTP/1.1" 500 3977 "-" "Mozilla/5.0"
+192.168.0.73 - - [13/05/2024:16:56:30 +0000] "GET /search?id=1' OR SUBSTRING((SELECT n),1,1)='n' --  HTTP/2" 200 1491 "-" "Chrome/91.0"
+192.168.0.104 - - [08/01/2024:11:23:36 +0000] "GET /search?id=1' OR SUBSTRING((SELECT _),1,1)='_' --  HTTP/2" 404 256 "http://example.com" "Chrome/91.0"
+192.168.0.16 - - [16/05/2024:09:58:15 +0000] "POST /search?id=1' OR SUBSTRING((SELECT a),1,1)='a' --  HTTP/1.1" 403 1323 "http://test.com" "Chrome/91.0"
+192.168.0.125 - - [17/01/2024:21:37:43 +0000] "POST /search?id=1' OR SUBSTRING((SELECT t),1,1)='t' --  HTTP/1.1" 404 3895 "-" "Safari/537.36"
+192.168.0.179 - - [28/06/2024:07:43:49 +0000] "GET /search?id=1' OR SUBSTRING((SELECT t),1,1)='t' --  HTTP/2" 500 2308 "http://test.com" "Mozilla/5.0"
+192.168.0.172 - - [07/07/2024:10:06:35 +0000] "POST /search?id=1' OR SUBSTRING((SELECT a),1,1)='a' --  HTTP/1.1" 404 379 "http://example.com" "Mozilla/5.0"
+192.168.0.65 - - [16/11/2024:17:46:12 +0000] "POST /search?id=1' OR SUBSTRING((SELECT c),1,1)='c' --  HTTP/1.1" 404 1013 "http://example.com" "Safari/537.36"
+192.168.0.139 - - [02/08/2024:00:50:50 +0000] "GET /search?id=1' OR SUBSTRING((SELECT k),1,1)='k' --  HTTP/1.1" 404 4126 "http://test.com" "Safari/537.36"
+192.168.0.190 - - [28/04/2024:09:28:59 +0000] "GET /search?id=1' OR SUBSTRING((SELECT }),1,1)='}' --  HTTP/2" 404 2570 "http://test.com" "Chrome/91.0"
+```
+FLAG : `flag{sql_injecti0n_attack}`
+
+## EXCELient
+
+In this we are provided with an excel file `user.xlsx` that hints that there are hidden sheets present 
+
+Then there was a sheet named as FLAG
+
+Then I asked to Chatgpt how unhide the sheets then I got to know that with right clicking on any sheet we can unhide the sheets...
+
+Then I unhide all the sheets and got fragments of flag : `FLAG{SHEET_425`
+
+But in Calc 2 formula was not working I did it manually : formula : `=CHAR(INDEX(A2:A100,8))&CHAR(INDEX(A2:A100,2))&CHAR(INDEX(A2:A100,3))&CHAR(INDEX(A2:A100,4))&CHAR(INDEX(A2:A100,5))&CHAR(INDEX(A2:A100,3))&CHAR(INDEX(A2:A100,6))&CHAR(INDEX(A2:A100,7))`
+
+Then the string I got is broken but I guessed it should be _SORCERY_ from other parts..
+
+So the flag is `flag{sheet_sorcery_425}`
+
 # OSINT
 
 ## Three_day_invasion (200 Points)
