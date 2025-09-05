@@ -34,6 +34,10 @@ audit note:
 # [4/5]=NS1C
 ```
 
+The fifth part was in .htaccess :
+```
+#[5/5]=S
+```
 Final Flag : `flag{S3GM3NT_F0R3NS1CS}` **S was missing in the part**
 
 # Crypto
