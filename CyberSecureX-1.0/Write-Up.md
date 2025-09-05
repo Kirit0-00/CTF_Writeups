@@ -300,7 +300,7 @@ The string was `W9gt5z7h`  After searching a lot I found out that this was a pas
 In that another gcode was there 
 ![](Pasted%20image%2020250905220234.png)
 
-FLAG : `flag{G_m4n_hehe}`
+FLAG : `flag{G_m4n_h3he}`
 
 ## The Archivist's Riddle 
 
