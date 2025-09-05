@@ -358,6 +358,35 @@ after that i just searched “flag{” and found the flag pushed in issues
 
 *flag*{f0und_th3_s0urc3_l1k3_a_b0ss}
 
+## Trained Few
+
+While searching for this I went to kiet_edu instagram profile, there I saw two batches about cybersecure-x training : (ExploitEdge BootCamp)
+
+First one has 96 students and second one has 65...
+
+So flag is : `flag{161}`
+
+## BUMBLLEBEE-2
+
+I was there in the previous ctf, So I knew about the OS that `ethical_buddy` has made which had name as the challenge.
+
+So I went to his github repo , where I saw recent commit which was only 16h ago... So when I viewed that commit I found the flag...
+
+https://github.com/ethical-buddy/ethical-buddy/commit/350bc5b37a79c1acbd9803b0d52139fc5cd17ed7
+
+`flag{Y3S_1_U5E_4i_to_hack}`
+
+## Brainrot
+
+In this I break the strings into two parts "c2hhcmQtMg== "  and "_4db3b07f-23d8-4322-a4bd-484628587a0f" 
+
+The first string when I searched in google I got a grok publicly shared chat and when I opened it and looked in its url I find that the another string was its chat id...
+
+So I changed the id to the given id and got two base64 encoded strings:
+`ZmxhZ3tPU0lOVF9odW50ZXJzX2ZpbmRfd2hhdCdzX2hpZGRlbl81ZjlhMWN9Cg==`
+This one was the flag...
+flag : `flag{OSINT_hunters_find_what's_hidden_5f9a1c}`
+
 # Steganography
 
 ## Layers of Silence (200 Points)
